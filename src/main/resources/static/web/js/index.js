@@ -1,7 +1,7 @@
 Vue.createApp({
     data() {
         return {
-            clientApiUrl:'http://localhost:8080/api/clients/current',
+            clientApiUrl:'/api/clients/current',
             client:[],
             cards:[],
             debitCards:[],

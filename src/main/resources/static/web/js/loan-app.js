@@ -7,9 +7,9 @@ window.addEventListener("load", function () {
         data() {
             return {
                 // API URL
-                clientApiUrl: 'http://localhost:8080/api/clients/current',
-                loanApiUrl: 'http://localhost:8080/api/loans',
-                loanApplicationApiUrl: 'http://localhost:8080/api/loans',
+                clientApiUrl: '/api/clients/current',
+                loanApiUrl: '/api/loans',
+                loanApplicationApiUrl: '/api/loans',
 
                 // Arrays with general info
                 clientInfo: [],
@@ -77,7 +77,7 @@ window.addEventListener("load", function () {
                 axios.post('/api/logout')
                     .then(response => {
                         console.log('You are signed out')
-                        window.location.href = "http://localhost:8080/web/index.html"
+                        window.location.href = "/web/index.html"
                     })
             },
             showBtnFunc() {
@@ -103,7 +103,7 @@ window.addEventListener("load", function () {
                         if (this.clientLoan.length < 2){
                             window.setTimeout(function () { location.reload() }, 2000)
                         } else {
-                            window.location.href = "http://localhost:8080/web/pages/accounts.html"
+                            window.location.href = "/web/pages/accounts.html"
                         }
 
                     })

@@ -6,8 +6,8 @@ window.addEventListener("load" , function(){
 Vue.createApp({
     data() {
         return {
-            clientApiUrl:'http://localhost:8080/api/clients/current',
-            accountApiUrl:'http://localhost:8080/api/clients/current/accounts',
+            clientApiUrl:'/api/clients/current',
+            accountApiUrl:'/api/clients/current/accounts',
             client:[],
             accounts:[],
             accountsEnable:[],
@@ -31,7 +31,7 @@ Vue.createApp({
             })
             .catch(function(error) {
                 if (error.response && error.response.status === 401) {
-                    window.location.href = "http://localhost:8080/web/index.html"
+                    window.location.href = "/web/index.html"
                 }
             })
 
@@ -50,7 +50,7 @@ Vue.createApp({
             axios.post('/api/logout')
                 .then(response => {
                     console.log('You are signed out')
-                    window.location.href = "http://localhost:8080/web/index.html"
+                    window.location.href = "/web/index.html"
                 })
         },
         

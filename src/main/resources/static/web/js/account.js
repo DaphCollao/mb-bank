@@ -6,9 +6,9 @@ window.addEventListener("load" , function(){
 Vue.createApp({
     data() {
         return {
-            clientApiUrl: 'http://localhost:8080/api/clients/current',
-            accountUrl: 'http://localhost:8080/api/accounts/',
-            disableAccountUrl: 'http://localhost:8080/api/clients/current/accounts',
+            clientApiUrl: '/api/clients/current',
+            accountUrl: '/api/accounts/',
+            disableAccountUrl: '/api/clients/current/accounts',
             clientInfo:[],
             account:[],
             transactions: [],
@@ -51,7 +51,7 @@ Vue.createApp({
             axios.post('/api/logout')
                 .then(response => {
                     console.log('You are signed out')
-                    window.location.href = "http://localhost:8080/web/index.html"
+                    window.location.href = "/web/index.html"
                 })
         },
         disableAccountFunc(idPath){
@@ -66,7 +66,7 @@ Vue.createApp({
                         showConfirmButton: false,
                         timer: 1500
                     })
-                    window.setTimeout(function () { window.location.href = "http://localhost:8080/web/pages/accounts.html"
+                    window.setTimeout(function () { window.location.href = "/web/pages/accounts.html"
                 }, 2000)
                 })
                 .catch(error => console.log(error))

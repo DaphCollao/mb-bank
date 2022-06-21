@@ -7,8 +7,8 @@ Vue.createApp({
     data() {
         return {
             // API URL
-            clientApiUrl:'http://localhost:8080/api/clients/current',
-            transferApiUrl: 'http://localhost:8080/api/transactions',
+            clientApiUrl:'/api/clients/current',
+            transferApiUrl: '/api/transactions',
             
             // Arrays with info
             clientInfo:[],
@@ -43,7 +43,7 @@ Vue.createApp({
             axios.post('/api/logout')
                 .then(response => {
                     console.log('You are signed out')
-                    window.location.href = "http://localhost:8080/web/index.html"
+                    window.location.href = "/web/index.html"
                 })
         },
         resetOptionFunc(){

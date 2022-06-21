@@ -2,7 +2,7 @@ Vue.createApp({
     data() {
         return {
             //Api
-            loansApiUrl: 'http://localhost:8080/api/loans',
+            loansApiUrl: '/api/loans',
             loans:[],
 
             //Sign In

@@ -6,8 +6,8 @@ window.addEventListener("load" , function(){
 Vue.createApp({
     data() {
         return {
-            clientApiUrl:'http://localhost:8080/api/clients/current',
-            cardApiUrl: 'http://localhost:8080/api/clients/current/cards',
+            clientApiUrl:'/api/clients/current',
+            cardApiUrl: '/api/clients/current/cards',
             client:[],
             cardType: "selectType",
             cardColor: "selectColor",
@@ -39,7 +39,7 @@ Vue.createApp({
             axios.post('/api/logout')
                 .then(response => {
                     console.log('You are signed out')
-                    window.location.href = "http://localhost:8080/web/index.html"
+                    window.location.href = "/web/index.html"
                 })
         },
         
@@ -49,7 +49,7 @@ Vue.createApp({
                 {headers:{'content-type':'application/x-www-form-urlencoded'}})
                 .then(response => {
                     console.log('New Card created')
-                    window.location.href = "http://localhost:8080/web/pages/cards.html"
+                    window.location.href = "/web/pages/cards.html"
                 })
                 .catch(error => {
                     console.log(error.response.data)

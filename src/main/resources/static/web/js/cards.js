@@ -6,8 +6,8 @@ window.addEventListener("load", function () {
 Vue.createApp({
     data() {
         return {
-            clientApiUrl: 'http://localhost:8080/api/clients/current',
-            cardApiUrl: 'http://localhost:8080/api/clients/current/cards',
+            clientApiUrl: '/api/clients/current',
+            cardApiUrl: '/api/clients/current/cards',
             client: [],
             cards: [],
             debitCards: [],
@@ -48,7 +48,7 @@ Vue.createApp({
                 axios.post('/api/logout')
                     .then(response => {
                         console.log('You are signed out')
-                        window.location.href = "http://localhost:8080/web/index.html"
+                        window.location.href = "/web/index.html"
                     })
             },
             disableCardFunc(cardId) {
