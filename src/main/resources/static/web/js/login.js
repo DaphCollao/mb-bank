@@ -38,9 +38,9 @@ Vue.createApp({
                 .then(response => {
                     console.log("Youre sign in")
                     if (this.email.includes("@mbb-admin.com")){
-                        window.location.href = "http://localhost:8080/web/manager/manager.html"
+                        window.location.href = "/web/manager/manager.html"
                     } else {
-                        window.location.href = "http://localhost:8080/web/pages/accounts.html"
+                        window.location.href = "/web/pages/accounts.html"
                     }
 
                 })
@@ -60,7 +60,7 @@ Vue.createApp({
                         {headers:{'content-type':'application/x-www-form-urlencoded'}})
                         .then(response => {
                             console.log("Youre sign in")
-                            window.location.href = "http://localhost:8080/web/pages/accounts.html"
+                            window.location.href = "/web/pages/accounts.html"
                         })
                 })
                 .catch(error => {
