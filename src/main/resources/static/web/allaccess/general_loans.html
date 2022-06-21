@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../media/favicon_io/favicon-32x32.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Loans | Mb</title>
+</head>
+
+<body id="loanBody">
+    <div id="app">
+        <!-- Header -->
+        <header class="row w-100 justify-content-between align-items-center wrapped">
+            <img class="logoImg col-3" src="../media/img/logo_mbb.png" alt="Logo Mb Bank">
+            <div class="col-9 d-flex justify-content-end" v-if="logged">
+                <div class="card cardHeader">
+                    <div class="card-body">
+                        <h4 class="h5"><i class="bi bi-person-bounding-box"></i> Hey, {{client.firstName}}</h4>
+                    </div>
+                </div>
+                <form v-on:click.prevent="logOutFunc" class="icon signOutHeader">
+                    <div class="wrapper">
+                        <div class="icon signOutHeader">
+                            <span class="tooltip">Sign Out</span>
+                            <span class="iconSignOut"><i type="submit" class="bi bi-box-arrow-in-right"></i></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-9 d-flex justify-content-end divHeader" v-else>
+                <ul class="listHeaderIndex m-0">
+                    <li class="personal"><a href="#">Personal</a></li>
+                    <li><a href="#">Business</a></li>
+                    <li><a href="../../manager/manager.html">Management</a></li>
+                </ul>
+                <button type="submit"> <a href="../index.html"> Sign In / Sign Up </a> </button>
+            </div>
+        </header>
+        <!-- NavBar -->
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <h3 class="navbar-brand">Mb Bank</h3>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Clients
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Products
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                                <li><a class="dropdown-item" href="./general_accounts.html">Accounts</a></li>
+                                <li><a class="dropdown-item" href="./general_cards.html">Cards</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./general_loans.html" id="navbarDropdown3" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Loans
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Main -->
+        <main>
+            <section class="loan mortgageLoan">
+                <div class="mortgageImg loanImg">
+                    <img src="../media/img/mortgage-loan.png" alt="">
+                </div>
+                <div class="mortgageText loanText pt-4">
+                    <h2 class="h3 text-center">Mortgage Loan</h2>
+                    <p class="text-center">
+                        Make you dream of house a reality
+                    </p>
+                    <ul class="listHide">
+                        <li>Max Amount: 500.000</li>
+                        <li>Payments: 12, 24, 36, 48, 60</li>
+                        <li>Fee: 10%</li>
+                    </ul>
+                    <ul class="listShow">
+                        <li>
+                            fixed fee for the entire duration of the loan
+                        </li>
+                        <li> 
+                            You will pay the same dividend throughout the life of the loan
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <section class="loan personalLoan">
+                <div class="personalImg loanImg">
+                    <img src="../media/img/personal-loan.png" alt="">
+                </div>
+                <div class="personalText loanText pt-4">
+                    <h2 class="h3 text-center">Personal Loan</h2>
+                    <p class="text-center">
+                        Finance your next big move
+                    </p>
+                    <ul class="listHide">
+                        <li>Max Amount: $100.000</li>
+                        <li>Payments: 6, 12, 24</li>
+                        <li>Fee: 20%</li>
+                    </ul>
+                    <ul class="listShow">
+                        <li>
+                            Once your loan is approved, you can take it online with immediate payment to your account
+                        </li>
+                        <li> 
+                            You can pay and check the status of your loan Online, whenever and wherever you want
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <section class="loan autoLoan">
+                <div class="autoImg loanImg">
+                    <img src="../media/img/auto-loan.png" alt="">
+                </div>
+                <div class="autoText loanText pt-4">
+                    <h2 class="h3 text-center">Auto Loan</h2>
+                    <p class="text-center">
+                        Have the car you've always wanted
+                    </p>
+
+                    <ul class="listHide">
+                        <li>Max Amount: $300.000</li>
+                        <li>Payments: 6, 12, 24, 36</li>
+                        <li>Fee: 15%</li>
+                    </ul>
+                    <ul class="listShow">
+                        <li>
+                            With auto loan finances the purchase of the car you were looking for, old or new
+                        </li>
+                        <li> 
+                            Leave your car under warranty and access a discount on the interest rate
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+        <!-- Footer -->
+        <footer class="container-fluid">
+            <div class="elementsFooter ">
+                <div class="listaFooter">
+                    <p>Legal</p>
+                    <p>Privacy</p>
+                    <p>Security</p>
+                </div>
+                <p>
+                    © Mb Bank | All Right Reserved
+                </p>
+            </div>
+        </footer>
+    </div>
+    <!-- Script de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+
+    <!-- Script de Axios - Vue.js - Chart.js - Javascript -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="../js/index.js"></script>
+
+</body>
+
+</html>

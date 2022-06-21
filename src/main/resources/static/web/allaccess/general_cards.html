@@ -1,0 +1,201 @@
+<html lang="en">
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../media/favicon_io/favicon-32x32.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Cards | Mb</title>
+</head>
+
+<body id="generalCards">
+    <div id="app">
+        <!-- Header -->
+        <header class="row w-100 justify-content-between align-items-center wrapped">
+            <img class="logoImg col-3" src="../media/img/logo_mbb.png" alt="Logo Mb Bank">
+            <div class="col-9 d-flex justify-content-end" v-if="logged">
+                <div class="card cardHeader">
+                    <div class="card-body">
+                        <h4 class="h5"><i class="bi bi-person-bounding-box"></i> Hey, {{client.firstName}}</h4>
+                    </div>
+                </div>
+                <form v-on:click.prevent="logOutFunc" class="icon signOutHeader">
+                    <div class="wrapper">
+                        <div class="icon signOutHeader">
+                            <span class="tooltip">Sign Out</span>
+                            <span class="iconSignOut"><i type="submit" class="bi bi-box-arrow-in-right"></i></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-9 d-flex justify-content-end divHeader" v-else>
+                <ul class="listHeaderIndex m-0">
+                    <li class="personal"><a href="#">Personal</a></li>
+                    <li><a href="#">Business</a></li>
+                    <li><a href="../../manager/manager.html">Management</a></li>
+                </ul>
+                <button type="submit"> <a href="../index.html"> Sign In / Sign Up </a> </button>
+            </div>
+        </header>
+        <!-- NavBar -->
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <h3 class="navbar-brand">Mb Bank</h3>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Clients
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Products
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                                <li><a class="dropdown-item" href="./general_accounts.html">Accounts</a></li>
+                                <li><a class="dropdown-item" href="./general_cards.html">Cards</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./general_loans.html">
+                                Loans
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Main -->
+        <main class="row mt-5 justify-content-evenly mainAccount text-center">
+            <h2>
+                Cards
+            </h2>
+            <h3>
+                We have different cards that adapt to you and your needs
+            </h3>
+            <p class="w-75 subtext">
+                Using MBB's Cards you will have great benefits at your fingertips when traveling the world, with
+                multiple services that will make your vacation an unforgettable experience that you will always want to
+                repeat. Do not stay without knowing these products designed for you.
+            </p>
+            <div class="allCards">
+                <!-- Titanium -->
+                <div class="row titaniumCard align-items-center">
+                    <div class="typeCardSewction col-12 col-md-8">
+                        <div class="row mx-1">
+                            <div class="titleSection">
+                                <p class="h1">
+                                    <span class="shadowText">Titanium</span> <span class="fw-bold">Visa</span> <span>Card</span> 
+                                </p>
+                            </div>
+                            <div class="text">
+                                <p class="h4 text-start">
+                                    Access multiple benefits local and abroad with your <span class="fw-bold contentText">Visa Titanium Card</span>.
+                                </p>
+                                <p class="h4 text-start">
+                                    Titanium Visa Card is part of benefits program, so all your purchases will accumulate dollar points, which are equivalent to US dollars that you can enjoy exchanging for trips and products.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 cardImgs">
+                        <img src="../media/img/titaniumCardEg.png" alt="Silver Card">
+                    </div>
+                </div>
+                <!-- Silver -->
+                <div class="row silverCard align-items-center">
+                    <div class="typeCardSewction col-12 col-md-8">
+                        <div class="row mx-1">
+                            <div class="titleSection">
+                                <p class="h1">
+                                    <span class="shadowText">Silver</span> <span class="fw-bold">Visa</span> <span>Card</span>
+                                </p>
+                            </div>
+                            <div class="text">
+                                <p class="h4 text-start">
+                                    With your <span class="fw-bold contentText">Visa Silver Card </span> you can access a wide range of benefits, complete information services, assistance and travel insurance that you can use at any time and from anywhere in the world.
+                                </p>
+                                <p class="h4 text-start">
+                                    Silver Visa Card is part of benefits program, so all your purchases will accumulate dollar points, which are equivalent to US dollars that you can enjoy exchanging for trips and products.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 cardImgs">
+                        <img src="../media/img/silverCardEg.png" alt="Silver Card">
+                    </div>
+                </div>
+                <!-- Gold -->
+                <div class="goldCard row align-items-center">
+                    <div class="typeCardSewction col-12 col-md-8">
+                        <div class="row mx-1">
+                            <div class="titleSection">
+                                <p class="h1">
+                                    <span class="shadowText">Gold</span> <span class="fw-bold">Visa</span> <span>Card</span>
+                                </p>
+                            </div>
+                            <div class="text">
+                                <p class="h4 text-start">
+                                    With your <span class="fw-bold contentText">Gold Silver Card </span> you can access a wide range of benefits, complete information and assistance services that you can use at any time and from anywhere in the world.
+                                </p>
+                                <p class="h4 text-start">
+                                    Gold Visa has Chip and Contactless technology, which allows you to make purchases and cash advances with the greatest security available and in all participating businesses.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 cardImgs">
+                        <img src="../media/img/goldCardEg.png" alt="Silver Card">
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+        <!-- Footer -->
+        <footer class="container-fluid">
+            <div class="elementsFooter ">
+                <div class="listaFooter">
+                    <p>Legal</p>
+                    <p>Privacy</p>
+                    <p>Security</p>
+                </div>
+                <p>
+                    © Mb Bank | All Right Reserved
+                </p>
+            </div>
+        </footer>
+    </div>
+    <!-- Script de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+
+    <!-- Script de Axios - Vue.js - Chart.js - Javascript -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="../js/index.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./media/favicon_io/favicon-32x32.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Manager | MindHub Brothers</title>
+</head>
+
+<body>
+    <div id="app" class="container-fluid">
+        <!-- Header -->
+        <header>
+            <img class="logoImg" src="./media/img/logo_mbb.png" alt="Logo MindHub Brothers Bank">
+            <div>
+                <ul class="listHeader">
+                    <li class="personal"><a href="#">Personal</a></li>
+                    <li><a href="#">Business</a></li>
+                    <li><a href="./manager.html">Management</a></li>
+                </ul>
+            </div>
+        </header>
+        <!-- NavBar -->
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">MindHub Brothers Bank</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Clients
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Products
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                                <li><a class="dropdown-item" href="./pages/accounts.html">Accounts</a></li>
+                                <li><a class="dropdown-item" href="#">Credit Cards</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Loans
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Transaction
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Imagen -->
+        <div>
+            <img class="w-100" src="./media/img/imagenCar.png" alt="">
+        </div>
+        <!-- Main -->
+        <main class="row mt-5 justify-content-center">
+            <div class="form w-75 col-12 row d-flex justify-content-center">
+                <h2 class="text-center col-12 mt-3">Client Manager</h2>
+                <form class="w-75 my-5 col-12" v-on:submit="addClient">
+                    <div class="mb-3">
+                        <label for="firstNameInput" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="firstNameInput" aria-describedby="firstNameInput"
+                            placeholder="John" v-model="clientFirstName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastNameInput" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="lastNameInput" aria-describedby="lastNameInput"
+                            placeholder="Wick" v-model="clientLastName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="emailInput" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp"
+                            placeholder="johnwick@jwmail.com" v-model="clientEmail">
+                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btnAddClient">Add Client</button>
+                </form>
+            </div>
+            <div class="table col-12 row d-flex justify-content-center my-5 clientList w-75">
+                <h2 class="text-center mt-3">Client List</h2>
+                <table class="table table-hover table-stripe w-75 my-5">
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="client in clients">
+                            <td>{{client.firstName}}</td>
+                            <td>{{client.lastName}}</td>
+                            <td>{{client.email}}</td>
+                            <td>
+                                <button class="btn delete" type="delete" v-on:click="removeClient(client._links.self.href)">
+                                    <i class="bi bi-trash-fill"></i> 
+                                </button>
+                            </td>                         
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Modal
+            <div class="pruebaModal" v-for="client in clients"> 
+                <div class="modal" tabindex="-1" id="editModal" v-on:submit="editClient(client._links.self.href)">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Edit Client</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form class="formModel">
+                                    <fieldset>
+                                        <label for="firstNameEdit" class="form-label">Client first and last name</label>
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" id="firstNameEdit" aria-describedby="basic-addon3" v-model="editFirstName" :placeholder="client.firstName">
+                                            <input type="text" class="form-control" id="lastNameEdit" aria-describedby="basic-addon3" v-model="editLastName" :placeholder="client.lastName">
+                                        </div>                            
+                                        <label for="emailEdit" class="form-label">Client email</label>
+                                        <input type="text" class="form-control" id="emailEdit" aria-describedby="basic-addon3" v-model="editEmail" :placeholder="client.email">
+                                    </fieldset>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" @click="editClient(client)">Close</button>
+                            <button type="submit" class="btn btn-primary btnSaveChanges">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <!-- Rest Response -->
+            <div class="col-12 row justify-content-center">
+                <h2 class="text-center col-12">Client Rest Response</h2>
+                <div class="accordion my-2" id="accordionReadMore">
+                    <div class="accordion-item" style="border: none;">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed w-auto" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" id="buttonIndex" @click="showRest =! showRest">
+                                <span v-if="showRest">
+                                    Hide Rest Response
+                                </span>  
+                                <span v-else>
+                                    Show Rest Response
+                                </span>
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionReadMore">
+                            <div class="card card-body">
+                                <pre class="col-12" v-show="showRest">
+                                    {{clients}}
+                                </pre> 
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </main>
+        <!-- Footer -->
+        <footer class="container-fluid">
+            <div class="elementsFooter ">
+                <div class="listaFooter">
+                    <p>Legal</p>
+                    <p>Privacy</p>
+                    <p>Security</p>
+                </div>
+                <p>
+                    © MindHub Brothers Bank | All Right Reserved
+                </p>
+            </div>
+        </footer>
+    </div>
+    <!-- Script de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+
+    <!-- Script de Axios - Vue - Javascript -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="./js/manager.js"></script>
+</body>
+
+</html>

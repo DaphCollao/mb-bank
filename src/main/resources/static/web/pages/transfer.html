@@ -1,0 +1,204 @@
+<html lang="en">
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../media/favicon_io/favicon-32x32.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Transfers | Mb</title>
+</head>
+
+<body>
+    <div id="app" class="container-fluid">
+        <!--=================== Header ===================-->
+        <header class="row w-100 justify-content-between align-items-center wrapped">
+            <img class="logoImg col-3" src="../media/img/logo_mbb.png" alt="Logo Mb Bank">
+            <div class="col-9 d-flex justify-content-end">
+                <div class="card cardHeader">
+                    <div class="card-body">
+                        <h4 class="h5"><i class="bi bi-person-bounding-box"></i> Hey, {{clientInfo.firstName}}</h4>
+                    </div>
+                </div>
+                <form v-on:click.prevent="logOutFunc" class="icon signOutHeader">
+                    <div class="wrapper">
+                        <div class="icon signOutHeader">
+                            <span class="tooltip">Sign Out</span>
+                            <span class="iconSignOut"><i type="submit" class="bi bi-box-arrow-in-right"></i></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </header>
+        <!--=================== NavBar ===================-->
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <h3 class="navbar-brand">Mb Bank</h3>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                        <li><a class="nav-link active" href="./accounts.html">Accounts</a></li>
+                        </li>
+                        <li class="nav-item">
+                        <li><a class="nav-link active" href="./cards.html">Cards</a></li>
+                        </li>
+                        <li class="nav-item">
+                        <li><a class="nav-link active" href="#">Transfer</a></li>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!--=================== Main ===================-->
+        <main class="row justify-content-around mb-5 createCards mainTransfer">
+            <div class="container">
+                <div class="header">
+                    <h2 id="title" class="text-center">Transfer</h2>
+                    <p id="description" class="description text-center">it's easy to move money between accounts</p>
+                </div>
+                <form id="survey-form" >
+                    <!-- Choose Own / Other Account -->
+                    <div class=" form-group">
+                        <p>Who do you want to transfer?</p>
+                        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                            <input type="radio" class="btn-check" id="own" autocomplete="off" name="targetNumber"
+                                value="own" v-model="targetOption" checked>
+                            <label class="btn btn-outline-light w-auto" for="own">Own account</label>
+
+                            <input type="radio" class="btn-check" id="other" autocomplete="off" name="targetNumber"
+                                value="other" v-model="targetOption">
+                            <label class="btn btn-outline-light w-auto" for="other">Third party account</label>
+
+                        </div>
+                    </div>
+                    <!-- Choose origin Account -->
+                    <div class="form-group row mainTransfer">
+                        <p class="col-6">Choose origin Account</p>
+                        <!-- RESET selection option -->
+                        <button type="button" class="btn btn-outline-light resetBtn col-6 w-auto"
+                            v-on:click="resetOptionFunc">Reset <i class="bi bi-arrow-clockwise"></i></button>
+
+                        <select id="dropdown" name="role" class="form-control" required v-model="originNumber">
+                            <option disabled selected value="selectOrigin">Select one</option>
+                            <option :value="account.number" v-for="account in accountsEnable"
+                                :disabled="targetNumber == account.number">{{account.number}}</option>
+                        </select>
+                        {{showBalanceFunc(originNumber)}}
+                        <div class="resetBtn w-auto" v-if="originNumber != 'selectOrigin'">
+                            <p>
+                                Your balance is: ${{accountBalance}}
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Choose OTHER target Account -->
+                    <div class="form-group" v-if="targetOption == 'other'">
+                        <label>Write target Account</label>
+                        <input type="text" class="w-100" v-model="targetNumber" placeholder="Third party account number">
+                    </div>
+                    <!-- <p v-if="targetOption == 'other'" :class="errorCatch == true? 'showError' : 'hideError' ">Target
+                        account doesn't exist, try again</p> -->
+
+                    <!-- Choose OWN target Account -->
+                    <div class="form-group" v-else>
+                        <p>Choose target Account</p>
+                        <select id="dropdown" name="role" class="form-control" required v-model="targetNumber">
+                            <option disabled selected value="">Select one</option>
+                            <option :value="account.number" v-for="account in accounts"
+                                :disabled="originNumber == account.number">{{account.number}}</option>
+                        </select>
+                    </div>
+
+                    <!-- Amount to transfer -->
+                    <div class="form-group">
+                        <p>Insert the amount to transfer</p>
+                        <input type="text" v-model="amount" class="w-100" placeholder="&#36;">
+                    </div>
+
+                    <!-- Description of transfer -->
+                    <div class="form-group">
+                        <p>Insert a description</p>
+                        <input type="text" v-model="description" class="w-100" placeholder="...">
+                    </div>
+
+                    <!-- SEND request -->
+                    <div class="form-group">
+                        <button type="button" id="submit" class="submit-button formBtn" data-bs-toggle="modal" data-bs-target="#sureTransfer">
+                            Send request
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+        <!--=================== Modal ===================-->
+        <div class="modal ownModal" id="sureTransfer" tabindex="-1">
+            <div class="modal-dialog-centered modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-center">Transaction</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="text-center">Are you sure you want to make this transaction? </p>
+                        <p v-if="originNumber != 'selectOrigin' ">From: <span>{{originNumber}}</span> </p>
+                        <p v-else>From: <span>Origin account not selected</span> </p>
+                        <p v-if="targetNumber != '' ">To: <span>{{targetNumber}}</span></p>
+                        <p v-else>To: <span>Target account not selected</span></p>
+                        <!-- <p>To: <span>{{targetNumber}}</span></p> -->
+                        <p>Amount: <span>&#36;{{amount}}</span></p>
+                        <p>Description: <span>{{description}}</span></p>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btnYes" v-on:click="sendTransferFunc">Yes</button>
+                        <button type="button" class="btn btnClose" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--=================== Footer ===================-->
+        <footer class="container-fluid">
+            <div class="elementsFooter ">
+                <div class="listaFooter">
+                    <p>Legal</p>
+                    <p>Privacy</p>
+                    <p>Security</p>
+                </div>
+                <p>
+                    © Mb Bank | All Right Reserved
+                </p>
+            </div>
+        </footer>
+
+        <!--=================== Loader ===================-->
+        <div class="loader" id="loader"><img src="../media/img/spin_loader.svg" /></div>
+    </div>
+    <!-- Script de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+
+    <!-- Script de Axios - Vue.js - Chart.js - Javascript - SweetAlert -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="../js/transfer.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.min.js"></script>
+
+</body>
+
+</html>

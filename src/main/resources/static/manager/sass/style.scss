@@ -1,0 +1,128 @@
+//Imports
+@import "reset";
+@import "variables";
+
+
+//Diseño Header
+body{
+    width: 100vw;
+    background-color: $grey;
+}
+header{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    .logoImg{
+        width: 5rem;
+    }
+    .listHeader{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: 1rem;
+        margin-right: 1rem;
+        li{
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+            color: $purple;
+        }
+    }
+}
+.navbar{
+    background-color: $purple !important;
+    .navbar-brand{
+        color: $yellow;
+    }
+    .nav-link{
+        color: $grey !important;
+    }
+}
+main{
+    //Formulario Manager AddClient
+    .form{
+        background-color: $yellowTransp;
+        border-radius: 10px;
+    }
+    .btnAddClient, .btnSaveChanges{
+        background-color: $purple;
+    }
+    //Tabla Manager Clients
+    .clientList{
+        background-color: $lightPurpleTransp;
+        border-radius: 10px;
+        @media screen and (max-width: 375px){
+            font-size: 0.43em;
+        }
+        @media screen and (min-width: 376px) and (max-width: 414px) {
+            font-size: 0.45em;
+        }
+        @media screen and (min-width: 415px) and (max-width: 576px) {
+            font-size: 55%;            
+        }
+    }
+    //Accordion Mnager RestApi Response
+    .accordion-item{
+        background-color: $grey;
+    }
+    .accordion-header{
+        position: relative;
+    }
+    .collapsed{
+        position: relative;
+        margin: auto;
+    }
+    .card-body{
+        background-color: $grey !important;
+        pre{
+            font-size: 55%;
+        @media screen and (min-width: 415px) and (max-width: 576px) {
+            font-size: 0.7em;
+        }
+        @media screen and (min-width: 577px) and (max-width: 768px) {
+            font-size: 0.9em;
+        }
+        @media screen and (min-width: 768px){
+            font-size: 1.2em;
+        }
+        }
+    }
+    //Client Data Accounts
+    .accountsHtml{
+        .card-header{
+            background-color: $lightPurple;
+            color: $yellow !important;
+        }
+        .totalRow{
+            text-align: right;
+        }
+        .arrowDirection{
+            transform: rotate(180deg);
+        }
+    }
+}
+
+footer{
+    background-color: $purple;
+    color: $grey;
+    .elementsFooter{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 1rem;
+        padding: 1rem 0;
+        @media screen and (max-width:668px){
+            flex-direction: column;
+            gap: 0;
+        }
+    }
+    .listaFooter{
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+    }
+}
