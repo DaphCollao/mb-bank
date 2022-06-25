@@ -19,8 +19,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
 
-import static com.mindHub.HomeBanking.Utils.Utils.getRandomNumber;
-import static com.mindHub.HomeBanking.Utils.Utils.getRandomString;
+import static com.mindHub.HomeBanking.Utils.Utils.*;
 
 
 @RestController

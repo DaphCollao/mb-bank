@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ClientDTO{
-    private String firstName, lastName, email;
+    private String firstName, lastName, email, password;
     private long id;
     private Set<AccountDTO> accounts = new HashSet<>();
     private Set<ClientLoanDTO> loans = new HashSet<>();
@@ -19,6 +19,7 @@ public class ClientDTO{
         this.firstName = client.getFirstName();
         this.lastName = client.getLastName();
         this.email = client.getEmail();
+        this.password = client.getPassword();
         this.accounts = client.getAccounts().stream().filter(account -> account.isEnable()).map(account -> new AccountDTO(account)).collect(Collectors.toSet());
         this.loans = client.getClientLoans().stream().map(loan -> new ClientLoanDTO(loan)).collect(Collectors.toSet());
         this.cards = client.getCards().stream().filter(card -> card.isEnable()).map(card -> new CardDTO(card)).collect(Collectors.toSet());
@@ -28,6 +29,7 @@ public class ClientDTO{
     public long getId() {
         return id;
     }
+
     public String getFirstName() {
         return firstName;
     }

@@ -2,6 +2,7 @@ package com.mindHub.HomeBanking.services.implement;
 
 import com.mindHub.HomeBanking.dtos.ClientDTO;
 import com.mindHub.HomeBanking.models.Client;
+import com.mindHub.HomeBanking.models.VerificationToken;
 import com.mindHub.HomeBanking.repositories.ClientRepository;
 import com.mindHub.HomeBanking.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;

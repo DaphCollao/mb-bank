@@ -26,13 +26,33 @@ public class Client {
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     private Set<Card> cards = new HashSet<>();
 
+    // Verification with Email, property start false
+    @Column(name = "enabled")
+    private boolean enabled;
+
+    private String token;
     //Constructors
-    public Client(){}
+    public Client(){};
     public Client(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+    }
+
+    // Getter & Setter Verification
+    public boolean isEnabled() {
+        return enabled;
+    }
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public String getToken() {
+        return token;
+    }
+    public void setToken(String token) {
+        this.token = token;
     }
 
     //Getter & Setter Class Client

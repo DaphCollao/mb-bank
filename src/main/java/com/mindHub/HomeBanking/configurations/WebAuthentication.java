@@ -2,6 +2,7 @@ package com.mindHub.HomeBanking.configurations;
 
 import com.mindHub.HomeBanking.models.Client;
 import com.mindHub.HomeBanking.repositories.ClientRepository;
+import com.mindHub.HomeBanking.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,18 +17,22 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class WebAuthentication extends GlobalAuthenticationConfigurerAdapter {
     @Autowired
-    ClientRepository clientRepository;
+    ClientService clientService;
 
     @Override
     public void init(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(inputName-> {
-            Client client = clientRepository.findByEmail(inputName);
+            Client client = clientService.clientFindByEmail(inputName);
             if (client != null) {
-                String userEmail = client.getEmail();
-                if (userEmail.contains("@mbb-admin.com")){
-                    return new User(client.getEmail(), client.getPassword(), AuthorityUtils.createAuthorityList("ADMIN"));
+                if (client.isEnabled()){
+                    String userEmail = client.getEmail();
+                    if (userEmail.contains("@mbb-admin.com")){
+                        return new User(client.getEmail(), client.getPassword(), AuthorityUtils.createAuthorityList("ADMIN"));
+                    } else {
+                        return new User(client.getEmail(), client.getPassword(), AuthorityUtils.createAuthorityList("CLIENT"));
+                    }
                 } else {
-                    return new User(client.getEmail(), client.getPassword(), AuthorityUtils.createAuthorityList("CLIENT"));
+                    throw new UsernameNotFoundException("User : " + inputName);
                 }
             } else {
                 throw new UsernameNotFoundException("Unknown user: " + inputName);
