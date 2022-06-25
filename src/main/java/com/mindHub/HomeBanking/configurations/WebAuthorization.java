@@ -18,7 +18,7 @@ public class WebAuthorization extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http.authorizeRequests()
-                .antMatchers("/web/index.html", "/web/login.html", "/web/css/**", "/web/media/**" , "/web/js/index.js","/web/js/login.js", "/web/allaccess/**", "/web/payment/**").permitAll()
+                .antMatchers("/web/index.html", "/web/login.html", "/web/css/**", "/web/media/**" , "/web/js/index.js","/web/js/login.js", "/web/allaccess/**", "/web/payment/**", "/web/test-registration.html" , "/web/registration.js").permitAll()
                 .antMatchers(HttpMethod.POST,"/api/clients", "/api/loans").permitAll()
                 .antMatchers("/rest/**", "web/manager/**", "/h2-console/**", "/pages/").hasAuthority("ADMIN")
                 .antMatchers("/web/**").hasAnyAuthority("CLIENT" , "ADMIN")

@@ -26,7 +26,7 @@ public class RegistrationController {
         Client client = userServiceImp.getClient(token);
         String tokenToDelete = client.getToken();
 
-        if (tokenToDelete == null) {
+        if (tokenToDelete == null || client.isEnabled()) {
             return new ResponseEntity<>("Invalid token" , HttpStatus.FORBIDDEN);
         }
         client.setEnabled(true);

@@ -45,6 +45,9 @@ public class RegistrationEmailListener implements ApplicationListener<OnRegistra
         String confirmationUrl = event.getAppUrl() + "/regitrationConfirm?token=" + token;
         String content = "<h1> Test </h1> <p> ClientName </p> <p> <a href=\"URL\"> Click aquí </a> </p>";
 
+        content.replace("ClientName", client.getFullName());
+        content.replace("URL", "http://localhost:8080/"+confirmationUrl);
+
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
         helper.setFrom(senderEmail, senderName);
