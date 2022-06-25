@@ -58,10 +58,13 @@ public class ClientController {
     }
     @Autowired
     ApplicationEventPublisher eventPublisher;
+    @Autowired
+    HttpServletRequest httpServletRequest;
+
     @PostMapping("/clients")
     public ResponseEntity<Object> register(
             @RequestParam String firstName, @RequestParam String lastName,
-            @RequestParam String email, @RequestParam String password, HttpServletRequest request, Error error) {
+            @RequestParam String email, @RequestParam String password, HttpServletRequest request) {
 
         if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty()) {
             return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
@@ -87,7 +90,7 @@ public class ClientController {
         newClient.setToken(generateToken);
         newClient.setEnabled(false);
 
-        // Publisher
+        // Publisher so Listener can take necessary data to function
         eventPublisher.publishEvent(new OnRegistrationSuccessEvent(newClient, appUrl));
 
         /* ===== Generate new Account when Register a New Client ===== */
@@ -101,6 +104,6 @@ public class ClientController {
         Account account = new Account(number, creationDate, balance, newClient, AccountType.credit , enable);
         accountService.saveAccount(account);
 
-        return new ResponseEntity<>("New registration successful", HttpStatus.CREATED);
+        return new ResponseEntity<>("New registration successful, need to verify email", HttpStatus.CREATED);
     }
 }

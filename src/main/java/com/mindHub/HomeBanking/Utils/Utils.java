@@ -17,7 +17,7 @@ public class Utils {
                 .toString();
     }
 
-    // Get random int for token (email verification)
+    // Get random String for token (email verification)
     private static List<String> createdToken = new ArrayList<>();
     public static String getToken(int leftLimit, int rightLimit,int targetStringLength, Random random){
         String tokenString= "";
@@ -26,6 +26,11 @@ public class Utils {
         } while (createdToken.contains(tokenString));
         createdToken.add(tokenString);
         return tokenString;
+    }
+
+    // remove token from list
+    public static void deleteToken(String token){
+        createdToken.remove(token);
     }
 
     // Ensure UpperCase on Password

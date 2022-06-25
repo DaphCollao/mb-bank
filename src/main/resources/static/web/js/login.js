@@ -55,13 +55,20 @@ Vue.createApp({
                 {headers:{'content-type':'application/x-www-form-urlencoded'}})
                 .then(response => {
                     console.log('registered')
-                    axios.post(this.logInPath, 
-                        `email=${this.newEmail}&password=${this.newPassword}`,
-                        {headers:{'content-type':'application/x-www-form-urlencoded'}})
-                        .then(response => {
-                            console.log("Youre sign in")
-                            window.location.href = "/web/pages/accounts.html"
-                        })
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: 'Need to verify email',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    // axios.post(this.logInPath, 
+                    //     `email=${this.newEmail}&password=${this.newPassword}`,
+                    //     {headers:{'content-type':'application/x-www-form-urlencoded'}})
+                    //     .then(response => {
+                    //         console.log("Youre sign in")
+                    //         window.location.href = "/web/pages/accounts.html"
+                    //     })
                 })
                 .catch(error => {
                     const typeOfError = error.response.data
@@ -83,10 +90,28 @@ Vue.createApp({
                                 clearInterval(timerInterval)
                             }
                         })
-                    } else {
+                    } else if (typeOfError == "Email already in use"){
                         Swal.fire({
                             title: "There's been an error",
                             html: 'Email already in use',
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: () => {
+                                Swal.showLoading()
+                                const b = Swal.getHtmlContainer().querySelector('b')
+                                timerInterval = setInterval(() => {
+                                    b.textContent = Swal.getTimerLeft()
+                                }, 100)
+                            },
+                            willClose: () => {
+                                clearInterval(timerInterval)
+                            }
+                        })
+
+                    } else if (typeOfError == "Password must have at least 8 characters"){
+                        Swal.fire({
+                            title: "There's been an error",
+                            html: 'Password length',
                             timer: 3000,
                             timerProgressBar: true,
                             didOpen: () => {

@@ -1,7 +1,6 @@
 package com.mindHub.HomeBanking.event;
 
 import com.mindHub.HomeBanking.models.Client;
-import com.mindHub.HomeBanking.models.VerificationToken;
 import com.mindHub.HomeBanking.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -10,7 +9,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
+import javax.mail.BodyPart;
 import javax.mail.MessagingException;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
 
@@ -39,21 +40,27 @@ public class RegistrationEmailListener implements ApplicationListener<OnRegistra
         String token = client.getToken();
 
         String recipientEmail = client.getEmail();
-        String senderEmail = "royaloaktest@outlook.com";
+        String senderEmail = "noreply.royaloak@gmail.com";
         String senderName = "Royal Oak staff";
         String subject = "Registration Confirmation";
-        String confirmationUrl = event.getAppUrl() + "/regitrationConfirm?token=" + token;
-        String content = "<h1> Test </h1> <p> ClientName </p> <p> <a href=\"URL\"> Click aquí </a> </p>";
+        String confirmationUrl = "/registrationConfirm.html?token=" + token;
 
-        content.replace("ClientName", client.getFullName());
-        content.replace("URL", "http://localhost:8080/"+confirmationUrl);
+        String content = "<h2 style=\"color: black;\">\n Welcome <spa style=\"color: yellow;\"n>Client</spa>  to our MB bank Family!\n </h2>\n"
+                +"<p style=\"color: #333533;\">\n We're so happy you decide to join us, please to verify your account open the link below\n </p>\n"
+                +"<p> <a href=\"URL\">Click here to verify Email</a> </p>"
+                +senderName;
+
+        content= content.replace("Client", client.getFirstName().toUpperCase());
+        content= content.replace("URL", "https://mb-bank.herokuapp.com/web"+confirmationUrl);
 
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
-        helper.setFrom(senderEmail, senderName);
+
+
+        helper.setFrom(senderEmail);
         helper.setTo(recipientEmail);
         helper.setSubject(subject);
-        helper.setText("http://localhost:8080" + confirmationUrl);
+        helper.setText(content, true);
         mailSender.send(message);
     }
 

@@ -27,15 +27,19 @@ public class HomeBankingApplication {
 		return (args) -> {
 			//Clients
 			Client client1 = new Client("Melba", "Morel", "melba@mindhub.com", passwordEncoder.encode("melba1"));
+			client1.setEnabled(true);
 			clientRepository.save(client1);
 
 			Client client2 = new Client("Juan", "Pérez", "perez@mindhub.com", passwordEncoder.encode("juan1"));
+			client2.setEnabled(true);
 			clientRepository.save(client2);
 
 			Client client3 = new Client("John", "Doe", "doe@mindhub.com", passwordEncoder.encode("john1"));
+			client3.setEnabled(true);
 			clientRepository.save(client3);
 
 			Client admin = new Client("admin", "admin", "admin@mbb-admin.com", passwordEncoder.encode("admin1"));
+			admin.setEnabled(true);
 			clientRepository.save(admin);
 
 			//Accounts (Accounts 1-2 Client 1 / Account 3 Client 2)

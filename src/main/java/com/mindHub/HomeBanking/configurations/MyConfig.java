@@ -10,7 +10,7 @@ import org.springframework.mail.javamail.MimeMessagePreparator;
 import javax.mail.internet.MimeMessage;
 import java.io.InputStream;
 
-@Configuration
+/* @Configuration
 public class MyConfig {
     @Bean
     public JavaMailSender javaMailSender() {
@@ -23,10 +23,12 @@ public class MyConfig {
             public void send(SimpleMailMessage... simpleMessages) throws MailException {
 
             }
+
             @Override
             public MimeMessage createMimeMessage() {
                 return null;
             }
+
             @Override
             public MimeMessage createMimeMessage(InputStream contentStream) throws MailException {
                 return null;
@@ -49,4 +51,4 @@ public class MyConfig {
             }
         };
     }
-}
+} */

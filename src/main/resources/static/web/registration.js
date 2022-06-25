@@ -1,8 +1,7 @@
 Vue.createApp({
     data() {
         return {
-            registrationUrlApi:"http://localhost:8080/api/registrationConfirm/",
-            token:"",
+            registrationUrlApi:"/api/registrationConfirm/",
         }
     },
     created() {
@@ -10,8 +9,9 @@ Vue.createApp({
         const paramToken = urlParams.get('token'); 
         axios.get(this.registrationUrlApi+`${paramToken}`)
             .then(datos =>{
-                console.log("ay por favo que funcione")
+                console.log("ay po favo que funcione")
             })
+            .catch(error => console.log(error.data))
     },
     methods: {
 
