@@ -11,7 +11,7 @@ Vue.createApp({
             .then(datos =>{
                 console.log("ay po favo que funcione")
             })
-            .catch(error => console.log(error.data))
+            .catch(error => console.log(error))
     },
     methods: {
 

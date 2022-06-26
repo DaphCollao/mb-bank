@@ -29,8 +29,8 @@ public class Client {
     // Verification with Email, property start false
     @Column(name = "enabled")
     private boolean enabled;
-
     private String token;
+
     //Constructors
     public Client(){};
     public Client(String firstName, String lastName, String email, String password) {
