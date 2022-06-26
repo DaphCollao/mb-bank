@@ -41,7 +41,7 @@ public class RegistrationEmailListener implements ApplicationListener<OnRegistra
 
         String recipientEmail = client.getEmail();
         String senderEmail = "noreply.royaloak@gmail.com";
-        String senderName = "Royal Oak staff";
+        String senderName = "MB bank staff";
         String subject = "Registration Confirmation";
         String confirmationUrl = "/registrationConfirm.html?token=" + token;
 
@@ -50,12 +50,11 @@ public class RegistrationEmailListener implements ApplicationListener<OnRegistra
                 +"<p> <a href=\"URL\">Click here to verify Email</a> </p>"
                 +senderName;
 
-        content= content.replace("Client", client.getFirstName().toUpperCase());
-        content= content.replace("URL", "https://mb-bank.herokuapp.com/web"+confirmationUrl);
+        content = content.replace("Client", client.getFirstName());
+        content = content.replace("URL", "https://mb-bank.herokuapp.com/web"+confirmationUrl);
 
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
-
 
         helper.setFrom(senderEmail);
         helper.setTo(recipientEmail);
