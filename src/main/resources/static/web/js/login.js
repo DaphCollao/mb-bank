@@ -93,7 +93,7 @@ Vue.createApp({
                     } else if (typeOfError == "Email already in use"){
                         Swal.fire({
                             title: "There's been an error",
-                            html: 'Email already in use',
+                            html: typeOfError,
                             timer: 3000,
                             timerProgressBar: true,
                             didOpen: () => {
@@ -111,7 +111,7 @@ Vue.createApp({
                     } else if (typeOfError == "Password must have at least 8 characters"){
                         Swal.fire({
                             title: "There's been an error",
-                            html: 'Password length',
+                            html: typeOfError,
                             timer: 3000,
                             timerProgressBar: true,
                             didOpen: () => {
